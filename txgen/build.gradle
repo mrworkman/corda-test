@@ -1,0 +1,41 @@
+
+dependencies {
+
+    implementation ("$cordaReleaseGroup:corda-node:$cordaVersion") {
+        // The Node only needs this for binary compatibility with Cordapps written in Kotlin 1.1.
+        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jre8'
+    }
+
+    implementation "com.r3.corda.lib.tokens:tokens-contracts:$tokensReleaseVersion"
+    implementation "com.r3.corda.lib.tokens:tokens-workflows:$tokensReleaseVersion"
+    implementation "com.r3.corda.lib.tokens:tokens-selection:$tokensReleaseVersion"
+    implementation "com.r3.corda.lib.tokens:tokens-money:$tokensReleaseVersion"
+
+    corneliusTestImplementation("$cordaReleaseGroup:corda-node:$cordaVersion") {
+        // The Node only needs this for binary compatibility with Cordapps written in Kotlin 1.1.
+        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jre8'
+    }
+    corneliusTestImplementation "com.r3.corda.lib.tokens:tokens-contracts:$tokensReleaseVersion"
+    corneliusTestImplementation "com.r3.corda.lib.tokens:tokens-workflows:$tokensReleaseVersion"
+    corneliusTestImplementation "com.r3.corda.lib.tokens:tokens-selection:$tokensReleaseVersion"
+    corneliusTestImplementation "com.r3.corda.lib.tokens:tokens-money:$tokensReleaseVersion"
+}
+
+corneliusTest {
+    if (project.hasProperty("numTokens")) {
+        systemProperty("numTokens", numTokens)
+    }
+}
+
+test {
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+    }
+}
+
+idea {
+    module {
+        downloadJavadoc = true // defaults to false
+        downloadSources = true
+    }
+}

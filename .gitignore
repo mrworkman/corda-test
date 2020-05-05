@@ -1,0 +1,13 @@
+# Standard build directories
+**/.gradle
+**/.idea
+**/out
+**/build
+**/logs
+**/.iml
+**/out
+*.iml
+
+# Mac metadata
+.DS_Store
+
